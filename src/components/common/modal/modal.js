@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import classes from './modal.module.css'
 import Modal from 'react-modal';
 
@@ -19,6 +19,10 @@ function ModalCtn({children, showModal, setShowModal, header}) {
             border:'none'
         },
     };
+
+    useEffect(()=>{
+        Modal.setAppElement('body');
+    })
 
 
     return (
