@@ -11,13 +11,13 @@ import { privateRoutes, publicRoutes } from './routes.constant'
 
 function Navigation() {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(true)
 
 
     return (
         <BrowserRouter>
             {
-                isLoggedIn?
+                isLoggedIn ?
                     <div className={classes.majorContainer}>
                         <div className={classes.navbar}>
                             <Navbar />
@@ -26,23 +26,23 @@ function Navigation() {
                             <Header />
                             <Routes>
                                 {
-                                    privateRoutes.map(r=>
-                                        <Route exact path={r.path} element={r.components} />    
+                                    privateRoutes.map(r =>
+                                        <Route exact path={r.path} element={r.components} />
                                     )
                                 }
-                                <Route path="*" element={<Navigate to="/dashboard"/>} />
+                                <Route path="*" element={<Navigate to="/dashboard" />} />
                             </Routes>
                         </div>
                     </div> :
                     <Routes>
                         {
-                            privateRoutes.map(r=>
-                                <Route exact path={r.path} element={<Navigate to="/"/>} />    
+                            privateRoutes.map(r =>
+                                <Route exact path={r.path} element={<Navigate to="/" />} />
                             )
                         }
                         {
-                            publicRoutes.map(r=>
-                                <Route exact path={r.path} element={r.components} />    
+                            publicRoutes.map(r =>
+                                <Route exact path={r.path} element={r.components} />
                             )
                         }
                         <Route path="*" element={<div>404 not found</div>} />
