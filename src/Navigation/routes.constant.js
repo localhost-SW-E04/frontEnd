@@ -27,7 +27,7 @@ export const publicRoutes = [
         components:<SignupPage />
     },
     {
-        path:"/signin",
+        path:"/login",
         components:<LoginPage />
     },
 ]
