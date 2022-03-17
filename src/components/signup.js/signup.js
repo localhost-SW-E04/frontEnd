@@ -1,6 +1,13 @@
 import React, { useState } from 'react'
 import classes from './signup.module.css'
 import { Link } from 'react-router-dom'
+import axios from 'axios';
+
+import { API_URI } from '../../apiEndPoint';
+
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../../state';
 
 function Signup() {
     const initialState = null;
@@ -11,6 +18,10 @@ function Signup() {
     const [confirmPass, setConfirmPass] = useState(initialState)
     const [verification, setVerification] = useState(false)
 
+    const dispatch = useDispatch();
+
+    const { setUser } = bindActionCreators(actionCreators, dispatch);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,11 +29,25 @@ function Signup() {
 
         if(pass === confirmPass){
             data = {
-                email,
-                adhaar,
-                name,
-                pass
+                email:email,
+                aadharno:adhaar,
+                name:name,
+                password:pass,
+                cpassword:pass,
+                gender:"Male",
+                dob:"01-01-2001"
             }
+            axios.post(`${API_URI}/user/signup`, data)
+                .then((res)=>{
+                    axios.get(`${API_URI}/user/${res.data.uid}`)
+                        .then(r=>{
+                            setUser(r.data)
+                        })
+                        .catch(err=>alert('something went wrong'))
+                })
+                .catch(err=>{
+                    alert('something went wrong')
+                })
         }else{
             alert("passwords doesn't match")
         }

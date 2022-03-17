@@ -24,7 +24,7 @@ function ModalCtn({children, showModal, setShowModal, header}) {
     return (
         <Modal
         isOpen={showModal}
-        onRequestClose={()=>setShowModal(!showModal)}
+        onRequestClose={()=>setShowModal(showModal)}
         style={customStyles}
         contentLabel="Example Modal">
             <div className={classes.majorContainer}>

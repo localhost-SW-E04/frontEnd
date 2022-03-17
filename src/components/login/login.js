@@ -1,20 +1,44 @@
 import React, { useState } from 'react'
 import classes from './login.module.css'
 import { Link } from 'react-router-dom'
+import axios from 'axios';
+
+import { API_URI } from '../../apiEndPoint';
+
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../../state';
 
 function Login() {
 
     const [adhaar, setAdhaar] = useState(null)
     const [password, setPassword] = useState(null)
 
+    const dispatch = useDispatch();
+
+    const { setUser } = bindActionCreators(actionCreators, dispatch);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const data = {
-            adhaar,
-            password
+        if(adhaar && password){
+            const data = {
+                aadharno:adhaar,
+                password
+            }
+            axios.post(`${API_URI}/user/signin`, data)
+                .then((res)=>{
+                    axios.get(`${API_URI}/user/${res.data.uid}`)
+                        .then(r=>{
+                            setUser(r.data)
+                        })
+                        .catch(err=>alert('something went wrong'))
+                })
+                .catch(err=>{
+                    alert('something went wrong')
+                })
         }
-        console.log(data)
+        // console.log(data)
     }
 
 

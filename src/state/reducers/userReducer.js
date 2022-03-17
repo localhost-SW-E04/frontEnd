@@ -2,7 +2,7 @@ const initState = null;
 
 const reducer = (state = initState, action) => {
     switch(action.type){
-        case 'setUser':
+        case 'set_user':
             let userDetails = action.payload;
             return userDetails;
         case "logout_user":

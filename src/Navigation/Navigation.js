@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classes from "./Navigation.module.css"
 
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
@@ -7,11 +7,24 @@ import Header from '../components/Header/Header'
 
 import { privateRoutes, publicRoutes } from './routes.constant'
 
+import { useSelector } from 'react-redux'
+
 
 
 function Navigation() {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(true)
+    const user = useSelector(s=>s.user)
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    useEffect(()=>{
+        if(user){
+            setIsLoggedIn(true);
+        }else if(user === false){
+            setIsLoggedIn(false);
+        }
+    },[user])
+
 
 
     return (
