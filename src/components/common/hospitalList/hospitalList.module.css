@@ -1,5 +1,5 @@
 .majorContainer{
-    height:calc(100vh - 140px - 85px - 70px);
+    height:100%;
     width:100%;
     border:none;
     border-radius: 14px;
@@ -131,4 +131,35 @@
     font-size: 35px;
     margin-top: 15px;
     margin-left: 10px;
+}
+
+
+.showCards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 3%;
+    /* background-color: yellow; */
+    width:100%;
+    max-height:calc(600px - 75px);
+    overflow: auto;
+    gap:30px;
+}
+.bedCard{
+    height: 100px;
+    width: 115px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px 0px #8389c7af;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.bedCard:hover{
+    transform: scale(1.04);
+}
+.bedCard h3{
+    margin:0px;
 }
