@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './Dashboard.module.css'
 
-import Cardone from '../common/cardOne/Cardone'
+import Cardone from '../common/cardOne/cardone'
 import HospitalList from '../common/hospitalList/hospitalList'
 import DoctorList from '../common/doctorList/doctorList'
 
