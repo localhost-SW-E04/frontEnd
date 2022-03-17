@@ -8,7 +8,7 @@ import ModalCtn from '../modal/modal';
 function Cardone({ Heading, subline }) {
     const [showModal, setShowModal] = useState(false)
     return (
-        <div className={classes.majorContainer} onClick={() => setShowModal(!showModal)}>
+        <div className={classes.majorContainer} onClick={() => (!showModal)&&setShowModal(true)}>
             <ModalCtn showModal={showModal} setShowModal={setShowModal} header={Heading}>
                 {Heading == "ediagnosis" ? <>
                     <div className={classes.edignose}>
@@ -32,8 +32,6 @@ function Cardone({ Heading, subline }) {
                         </div>
                     </>
                 }
-
-
             </ModalCtn>
             <img src={Image1} className={classes.image} />
             <div className={classes.content}>

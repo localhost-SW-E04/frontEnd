@@ -12,7 +12,7 @@ function Hospital(){
     const [showModal, setShowModal] = useState(false)
 
     return(
-        <div className={classes.majorCardContainer} onClick={()=>setShowModal(!showModal)}>
+        <div className={classes.majorCardContainer} onClick={()=>(!showModal) && setShowModal(true)}>
         <ModalCtn showModal={showModal} setShowModal={setShowModal} header={"Beds Available"}>
                 <div className={classes.showCards}>
                     <div className={classes.bedCard}>
