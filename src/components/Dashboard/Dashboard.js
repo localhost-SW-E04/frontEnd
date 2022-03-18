@@ -11,11 +11,11 @@ function Dashboard() {
 
     const [user, setUser] = useState(null)
 
-    const state = useSelector(s=>s);
+    const state = useSelector(s => s);
 
-    useEffect(()=>{
+    useEffect(() => {
         setUser(state.user);
-    },[state])
+    }, [state])
 
 
 
