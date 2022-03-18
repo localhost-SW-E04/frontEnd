@@ -154,11 +154,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     cursor: pointer;
+    text-align: center;
 }
 .bedCard:hover{
     transform: scale(1.04);
+}
+.bedCard p{
+    padding: 0px 3px;
+    margin: 0px;
 }
 .bedCard h3{
     margin:0px;

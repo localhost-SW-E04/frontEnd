@@ -1,71 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classes from './hospitalList.module.css'
 import CardGap from '../../../assets/common/cardGap.svg'
 import Image1 from '../../../assets/common/image1.svg'
 import ModalCtn from '../modal/modal';
 
 import StarRatings from 'react-star-ratings';
+import axios from 'axios';
+import { API_URI } from '../../../apiEndPoint';
 
 
-function Hospital(){
+function Hospital({details}){
 
     const [showModal, setShowModal] = useState(false)
 
+    const [beds, setBeds] = useState(details.bed)
+
     return(
         <div className={classes.majorCardContainer} onClick={()=>(!showModal) && setShowModal(true)}>
-        <ModalCtn showModal={showModal} setShowModal={setShowModal} header={"Beds Available"}>
-                <div className={classes.showCards}>
-                    <div className={classes.bedCard}>
-                        <p>Ventilators</p>
-                        <h3>27</h3>
+            <ModalCtn showModal={showModal} setShowModal={setShowModal} header={"Beds Available"}>
+                    <div className={classes.showCards}>
+                        {
+                            beds && 
+                            beds.map((b)=>
+                                <div className={classes.bedCard}>
+                                    <p>{ b.type }</p>
+                                    <h3>{ b.number }</h3>
+                                </div>
+                            )
+                        }
                     </div>
-                    <div className={classes.bedCard}>
-                        <p>Ventilators</p>
-                        <h3>27</h3>
-                    </div>
-                    <div className={classes.bedCard}>
-                        <p>Ventilators</p>
-                        <h3>27</h3>
-                    </div>
-                    <div className={classes.bedCard}>
-                        <p>Ventilators</p>
-                        <h3>27</h3>
-                    </div>
-                    <div className={classes.bedCard}>
-                        <p>Ventilators</p>
-                        <h3>27</h3>
-                    </div>
-                    <div className={classes.bedCard}>
-                        <p>Ventilators</p>
-                        <h3>27</h3>
-                    </div>
-                    <div className={classes.bedCard}>
-                        <p>Ventilators</p>
-                        <h3>27</h3>
-                    </div>
-                    <div className={classes.bedCard}>
-                        <p>Ventilators</p>
-                        <h3>27</h3>
-                    </div>
-                    <div className={classes.bedCard}>
-                        <p>Ventilators</p>
-                        <h3>27</h3>
-                    </div>
-                    <div className={classes.bedCard}>
-                        <p>Ventilators</p>
-                        <h3>27</h3>
-                    </div>
-                    <div className={classes.bedCard}>
-                        <p>Ventilators</p>
-                        <h3>27</h3>
-                    </div>
-                </div>
-        </ModalCtn>
+            </ModalCtn>
             <div  className={classes.nameLogo}>
                 <img src={Image1} className={classes.image}/>
                 <div className={classes.content}>
-                    <h3>Apollo Hospital</h3>
-                    <p>Apollo Hospitals is the leading multispecialty health care unit with best in class treatments for cancer, knee replacements, liver transplant, heart etc</p>
+                    <h3>{ details.name }</h3>
+                    <p>{ details.desc }</p>
                     <p><b>look for availability</b></p>
                 </div>
             </div>
@@ -85,7 +54,20 @@ function Hospital(){
     )
 }
 
-function hospitalList({fulscreen = false}) {
+function HospitalList() {
+
+    const [hospitals, setHospitals] = useState(null)
+
+    useEffect(()=>{
+        axios.get(`${API_URI}/hospital/`)
+            .then(res=>{
+                setHospitals(res.data);
+            })
+            .catch(err=>{
+                alert(err)
+            })
+    },[])
+
     return (
         <div className={classes.majorContainer}>
             <div className={classes.header}>
@@ -93,18 +75,15 @@ function hospitalList({fulscreen = false}) {
                 <input type="text" placeholder="Search" />
             </div>
             <div className={classes.List}>
-                <Hospital />
-                <Hospital />
-                <Hospital />
-                <Hospital />
-                <Hospital />
-                <Hospital />
-                <Hospital />
-                <Hospital />
-                <Hospital />
+                {
+                    hospitals &&
+                    hospitals.map(h=>
+                        <Hospital details={h}/>
+                    )
+                }
             </div>
         </div>
     )
 }
 
-export default hospitalList
+export default HospitalList
