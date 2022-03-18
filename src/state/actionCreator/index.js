@@ -6,3 +6,12 @@ export const setUser = (user) => {
         });
     }
 }
+
+export const logoutUser = () => {
+    return (dispatch) => {
+        dispatch({
+            type: "logout_user",
+            payload: null
+        });
+    }
+}

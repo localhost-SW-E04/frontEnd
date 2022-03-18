@@ -12,7 +12,7 @@
     border-top-left-radius: 50px ;
     border-bottom-left-radius: 50px ;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     gap:14px;
 }
@@ -40,4 +40,15 @@
     height:70%;
     border-radius: 14px;
     font-weight: 600;
+}
+.iconContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-right: 10px;
+}
+.iconContainer svg{
+    font-size: 20px;
+    cursor: pointer;
 }

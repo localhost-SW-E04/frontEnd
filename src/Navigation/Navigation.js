@@ -20,7 +20,7 @@ function Navigation() {
     useEffect(()=>{
         if(user){
             setIsLoggedIn(true);
-        }else if(user === false){
+        }else if(user === null){
             setIsLoggedIn(false);
         }
     },[user])

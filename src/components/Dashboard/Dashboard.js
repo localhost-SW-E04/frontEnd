@@ -1,11 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import classes from './Dashboard.module.css'
 
 import Cardone from '../common/cardOne/cardone'
 import HospitalList from '../common/hospitalList/hospitalList'
 import DoctorList from '../common/doctorList/doctorList'
 
+import { useSelector } from 'react-redux'
+
 function Dashboard() {
+
+    const [user, setUser] = useState(null)
+
+    const state = useSelector(s=>s);
+
+    useEffect(()=>{
+        setUser(state.user);
+    },[state])
+
+
+
     return (
         <div className={classes.majorContainer}>
             <div className={classes.leftCol}>
@@ -20,10 +33,22 @@ function Dashboard() {
             <div className={classes.rightCol}>
                 <div className={classes.adhaarHolder}>
                     <div className={classes.adhaar}>
-                        <h4>Samaresh Samanta</h4>
-                        <h4>18-08-2001</h4>
-                        <h4>Male</h4>
-                        <h2>918056676419</h2>
+                        {
+                            user &&
+                            <h4>{user.name}</h4>
+                        }
+                        {
+                            user &&
+                            <h4>{user.dob}</h4>
+                        }
+                        {
+                            user &&
+                            <h4>{user.gender}</h4>
+                        }
+                        {
+                            user &&
+                            <h4>{user.aadharno}</h4>
+                        }
                     </div>
                 </div>
                 <div className={classes.doctorHolder}>
